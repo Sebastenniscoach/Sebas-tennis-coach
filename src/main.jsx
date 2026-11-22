@@ -10,9 +10,49 @@ const when=v=>new Date(v).toLocaleString('es-MX',{timeZone:'America/Mexico_City'
 const TABS=['Inicio','Noticias','Academia','Reservar','Mis reservas','Contacto'];
 function App(){
 const[tab,setTab]=useState('Inicio'),[session,setSession]=useState(null),[coach,setCoach]=useState(false),[services,setServices]=useState([]),[slots,setSlots]=useState([]),[bookings,setBookings]=useState([]),[notice,setNotice]=useState(''),[busy,setBusy]=useState(false),[email,setEmail]=useState(''),[password,setPassword]=useState(''),[fullName,setFullName]=useState(''),
-[tennisLevel,setTennisLevel]=useState('Principiante'),[mode,setMode]=useState('login'),[admin,setAdmin]=useState(false),[form,setForm]=useState({service_id:'',starts_at:'',ends_at:'',location:''});
+[tennisLevel,setTennisLevel]=useState('Principiante'),[mode,setMode]=useState('login'),[admin,setAdmin]=useState(false),[profiles,setProfiles]=useState([]),
+  [form,setForm]=useState({service_id:'',starts_at:'',ends_at:'',location:''});
 async function load(){if(!db)return;const[s,a]=await Promise.all([db.from('services').select('id,name,duration_minutes,price_mxn,capacity,active').eq('active',true).order('id'),db.from('availability').select('id,service_id,starts_at,ends_at,location,is_available').eq('is_available',true).gte('starts_at',new Date().toISOString()).order('starts_at')]);if(s.error)setNotice('No se pudieron leer los servicios: '+s.error.message);else setServices(s.data||[]);if(a.error)setNotice('No se pudieron leer los horarios: '+a.error.message);else setSlots(a.data||[])}
-async function authRefresh(user){setSession(user||null);if(!db||!user){setCoach(false);setAdmin(false);setBookings([]);return}const r=await db.from('coach_admins').select('user_id').eq('user_id',user.id).maybeSingle();setCoach(!r.error&&!!r.data);const b=await db.from('bookings').select('id,player_id,availability_id,status,created_at').order('created_at',{ascending:false});if(!b.error)setBookings(b.data||[])}
+
+async function authRefresh(user) {
+  setSession(user || null);
+
+  if (!db || !user) {
+    setCoach(false);
+    setAdmin(false);
+    setBookings([]);
+    setProfiles([]);
+    return;
+  }
+
+  const r = await db
+    .from('coach_admins')
+    .select('user_id')
+    .eq('user_id', user.id)
+    .maybeSingle();
+
+  const isCoach = !r.error && !!r.data;
+  setCoach(isCoach);
+
+  const b = await db
+    .from('bookings')
+    .select('id,player_id,availability_id,status,created_at')
+    .order('created_at', { ascending: false });
+
+  if (!b.error) setBookings(b.data || []);
+
+  if (isCoach) {
+    const p = await db
+      .from('profiles')
+      .select('id,full_name,tennis_level');
+
+    if (!p.error) setProfiles(p.data || []);
+    else setNotice('Error al cargar alumnos: ' + p.error.message);
+  } else {
+    setProfiles([]);
+  }
+}
+
 useEffect(()=>{if(!db)return;load();db.auth.getUser().then(({data})=>authRefresh(data.user));const{data:{subscription}}=db.auth.onAuthStateChange((_event,s)=>{authRefresh(s?.user)});return()=>subscription.unsubscribe()},[]);
 async function login(e){e.preventDefault();if(!db)return;setBusy(true);setNotice('');const r=mode==='login'?await db.auth.signInWithPassword({email,password}):await db.auth.signUp({
   email,
