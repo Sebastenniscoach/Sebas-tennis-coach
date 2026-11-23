@@ -81,18 +81,35 @@ return <><header><div className="header"><div className="brand" onClick={()=>{se
   <span className="eyebrow">CONOCE A TU ENTRENADOR</span>
   <h2>Sebastián Suárez</h2>
   
-<img
-  src="/321ECACF-38AC-4CFB-94D9-4C0220184C8C.png"
-  alt="Sebastián Suárez, entrenador de tenis"
-  style={{
-    width: '100%',
-    maxWidth: '380px',
-    height: 'auto',
-    borderRadius: '16px',
-    display: 'block',
-    margin: '20px auto'
-  }}
-/>
+
+<div style={{
+  display: 'flex',
+  gap: '16px',
+  overflowX: 'auto',
+  scrollSnapType: 'x mandatory',
+  padding: '12px 0',
+  WebkitOverflowScrolling: 'touch'
+}}>
+  {[
+    '/321ECACF-38AC-4CFB-94D9-4C0220184C8C.png'
+  ].map((foto, i) => (
+    <img
+      key={i}
+      src={foto}
+      alt={`Sebastián Suárez - fotografía ${i + 1}`}
+      style={{
+        width: '100%',
+        maxWidth: '480px',
+        flexShrink: 0,
+        borderRadius: '18px',
+        scrollSnapAlign: 'center',
+        objectFit: 'contain',
+        background: '#eef4ed'
+      }}
+    />
+  ))}
+</div>
+
 
   <h3>Tenis con ciencia, técnica y desarrollo humano</h3>
 
