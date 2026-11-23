@@ -80,6 +80,20 @@ return <><header><div className="header"><div className="brand" onClick={()=>{se
 <section className="panel" style={{marginTop:32,padding:24}}>
   <span className="eyebrow">CONOCE A TU ENTRENADOR</span>
   <h2>Sebastián Suárez</h2>
+  
+<img
+  src="/IMG_2023.png"
+  alt="Sebastián Suárez, entrenador de tenis"
+  style={{
+    width: '100%',
+    maxWidth: '380px',
+    height: 'auto',
+    borderRadius: '16px',
+    display: 'block',
+    margin: '20px auto'
+  }}
+/>
+
   <h3>Tenis con ciencia, técnica y desarrollo humano</h3>
 
   <p>
