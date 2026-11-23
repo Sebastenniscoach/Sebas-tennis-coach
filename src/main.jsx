@@ -82,7 +82,7 @@ return <><header><div className="header"><div className="brand" onClick={()=>{se
   <h2>Sebastián Suárez</h2>
   
 <img
-  src="/IMG_2023.png"
+  src="/321ECACF-38AC-4CFB-94D9-4C0220184C8C.png"
   alt="Sebastián Suárez, entrenador de tenis"
   style={{
     width: '100%',
