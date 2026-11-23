@@ -104,7 +104,17 @@ return <><header><div className="header"><div className="brand" onClick={()=>{se
       <option value="Avanzado">Avanzado</option>
     </select>
   </label>
-</>}<label>Correo<input required type="email" value={email} onChange={e=>setEmail(e.target.value)}/></label><label>Contraseña<input required type="password" minLength={6} value={password} onChange={e=>setPassword(e.target.value)}/></label><button disabled={busy||!db} className="primary">{mode==='login'?'Entrar':'Registrarme'}</button></form><button className="textbtn" onClick={()=>setMode(mode==='login'?'signup':'login')}>{mode==='login'?'¿Nuevo alumno? Crear cuenta':'Ya tengo cuenta'}</button></>}</section><section className="panel"><h2>Conecta con Sebastián</h2><p>Próximamente: WhatsApp, Instagram, ubicación y datos de contacto oficiales.</p><p>Los datos de contacto no se publicarán hasta que el coach los confirme.</p></section></div></>}
+</>}<label>Correo<input required type="email" value={email} onChange={e=>setEmail(e.target.value)}/></label><label>Contraseña<input required type="password" minLength={6} value={password} onChange={e=>setPassword(e.target.value)}/></label><button disabled={busy||!db} className="primary">{mode==='login'?'Entrar':'Registrarme'}</button></form><button className="textbtn" onClick={()=>setMode(mode==='login'?'signup':'login')}>{mode==='login'?'¿Nuevo alumno? Crear cuenta':'Ya tengo cuenta'}</button></>}</section><section className="panel"><h2>Conecta con Sebastián</h2><p>Próximamente: WhatsApp, Instagram, ubicación y datos de contacto oficiales.</p><p>Los datos de contacto no se publicarán hasta que el coach los confirme.</p></section><div style={{display:'flex',gap:'12px',flexWrap:'wrap',justifyContent:'center',padding:'24px'}}>
+  <a href="https://wa.me/524272455402" target="_blank" rel="noopener noreferrer" className="btn">
+    WhatsApp Sebastián Suárez
+  </a>
+  <a href="https://wa.me/524272438914" target="_blank" rel="noopener noreferrer" className="btn">
+    WhatsApp Sebastián Tenis Oficial
+  </a>
+</div></div></>}
 </main>}
-<footer><strong>SEBAS TENNIS COACH</strong><span>Entrena con propósito. Juega con pasión.</span><small>© {new Date().getFullYear()} Sebas Tennis Coach</small></footer>{!db&&<div className="setup">Faltan las variables VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY en Vercel.</div>}</>}
+
+
+
+  <footer><strong>SEBAS TENNIS COACH</strong><span>Entrena con propósito. Juega con pasión.</span><small>© {new Date().getFullYear()} Sebas Tennis Coach</small></footer>{!db&&<div className="setup">Faltan las variables VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY en Vercel.</div>}</>}
 createRoot(document.getElementById('root')).render(<App/>);
