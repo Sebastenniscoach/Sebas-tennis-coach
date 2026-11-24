@@ -91,7 +91,11 @@ return <><header><div className="header"><div className="brand" onClick={()=>{se
   WebkitOverflowScrolling: 'touch'
 }}>
   {[
-    '/321ECACF-38AC-4CFB-94D9-4C0220184C8C.png'
+    '/321ECA​​CF-38AC-4CFB-94D9-4C0220184C8C.png'.replace(/\u200B/g, ''),
+'/2D7197A4-3AFC-4797-9C13-25268B752FF3.png',
+'/6862F353-1FE0-4A49-823B-26E1A0C9EFDA.png',
+'/E2244B43-886B-416C-8A91-A0887B2DF891.png',
+'/3532A00D-2EBB-4E07-97D0-85AAB9735E9E.png'
   ].map((foto, i) => (
     <img
       key={i}
